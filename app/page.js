@@ -1,6 +1,5 @@
 
 import PricingTabs from './PricingTabs';
-import features from './features';
 import Landing from './landing';
 import Features from "./features";
 

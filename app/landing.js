@@ -37,7 +37,7 @@ export default function Landing() {
                     </Toolbar>
                 </AppBar>
                 {/* hero section */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', textAlign: 'center', my: 4 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh', textAlign: 'center', my: 4 }}>
                     <Box>
                         <Typography variant="h2" component="h1" gutterBottom>
                             Create Flashcards Effortlessly

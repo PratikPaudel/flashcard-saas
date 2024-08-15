@@ -5,96 +5,105 @@ import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
 import Typography from '@mui/joy/Typography';
+import { Box } from '@mui/material';
 
 export default function TabsPricingExample() {
     return (
-        <Tabs
-            variant="outlined"
-            aria-label="Pricing plan"
-            defaultValue={0}
+        <Box
             sx={{
-                width: 343,
-                borderRadius: 'lg',
-                boxShadow: 'sm',
-                overflow: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
             }}
         >
-            <TabList
-                disableUnderline
-                tabFlex={1}
+            <Tabs
+                variant="outlined"
+                aria-label="Pricing plan"
+                defaultValue={0}
                 sx={{
-                    [`& .${tabClasses.root}`]: {
-                        fontSize: 'sm',
-                        fontWeight: 'lg',
-                        [`&[aria-selected="true"]`]: {
-                            color: 'primary.500',
-                            bgcolor: 'background.surface',
-                        },
-                        [`&.${tabClasses.focusVisible}`]: {
-                            outlineOffset: '-4px',
-                        },
-                    },
+                    width: 750,
+                    borderRadius: 'lg',
+                    boxShadow: 'sm',
+                    overflow: 'auto',
+                    height: 500,
                 }}
             >
-                <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
-                    Community
-                </Tab>
-                <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
-                    Pro
-                </Tab>
-                <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
-                    Premium
-                </Tab>
-            </TabList>
-            <TabPanel value={0}>
-                <Typography level="inherit">
-                    Get started with the industry-standard React UI library, MIT-licensed.
-                </Typography>
-                <Typography textColor="success.400" fontSize="xl3" fontWeight="xl" mt={1}>
-                    $0{' '}
-                    <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
-                        － Free forever
+                <TabList
+                    disableUnderline
+                    tabFlex={1}
+                    sx={{
+                        [`& .${tabClasses.root}`]: {
+                            fontSize: 'sm',
+                            fontWeight: 'lg',
+                            [`&[aria-selected="true"]`]: {
+                                color: 'primary.500',
+                                bgcolor: 'background.surface',
+                            },
+                            [`&.${tabClasses.focusVisible}`]: {
+                                outlineOffset: '-4px',
+                            },
+                        },
+                    }}
+                >
+                    <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
+                        Basic
+                    </Tab>
+                    <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
+                        Standard
+                    </Tab>
+                    <Tab disableIndicator variant="soft" sx={{ flexGrow: 1 }}>
+                        Premium
+                    </Tab>
+                </TabList>
+                <TabPanel value={0}>
+                    <Typography level="inherit">
+                        Perfect for individuals who are just getting started with flashcards.
                     </Typography>
-                </Typography>
-            </TabPanel>
-            <TabPanel value={1}>
-                <Typography level="inherit">
-                    Best for professional developers building enterprise or data-rich
-                    applications.
-                </Typography>
-                <Typography textColor="primary.400" fontSize="xl3" fontWeight="xl" mt={1}>
-                    $15{' '}
-                    <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
-                        / dev / month
+                    <Typography textColor="success.400" fontSize="xl3" fontWeight="xl" mt={1}>
+                        $0{' '}
+                        <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
+                            － Free forever
+                        </Typography>
                     </Typography>
-                </Typography>
-            </TabPanel>
-            <TabPanel value={2}>
-                <Typography level="inherit">
-                    The most advanced features for data-rich applications, as well as the
-                    highest priority for support.
-                </Typography>
-                <Typography textColor="primary.400" fontSize="xl3" fontWeight="xl" mt={1}>
-                    <Typography
-                        fontSize="xl"
-                        borderRadius="sm"
-                        px={0.5}
-                        mr={0.5}
-                        sx={(theme) => ({
-                            ...theme.variants.soft.danger,
-                            color: 'danger.400',
-                            verticalAlign: 'text-top',
-                            textDecoration: 'line-through',
-                        })}
-                    >
-                        $49
+                </TabPanel>
+                <TabPanel value={1}>
+                    <Typography level="inherit">
+                        Ideal for students and professionals who need more features.
                     </Typography>
-                    $37*{' '}
-                    <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
-                        / dev / month
+                    <Typography textColor="primary.400" fontSize="xl3" fontWeight="xl" mt={1}>
+                        $1{' '}
+                        <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
+                            / user / month
+                        </Typography>
                     </Typography>
-                </Typography>
-            </TabPanel>
-        </Tabs>
+                </TabPanel>
+                <TabPanel value={2}>
+                    <Typography level="inherit">
+                        Best for teams and organizations requiring advanced features and support.
+                    </Typography>
+                    <Typography textColor="primary.400" fontSize="xl3" fontWeight="xl" mt={1}>
+                        <Typography
+                            fontSize="xl"
+                            borderRadius="sm"
+                            px={0.5}
+                            mr={0.5}
+                            sx={(theme) => ({
+                                ...theme.variants.soft.danger,
+                                color: 'danger.400',
+                                verticalAlign: 'text-top',
+                                textDecoration: 'line-through',
+                            })}
+                        >
+                            $3
+                        </Typography>
+                        $2*{' '}
+                        <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
+                            / user / month
+                        </Typography>
+                    </Typography>
+                </TabPanel>
+            </Tabs>
+        </Box>
     );
 }
