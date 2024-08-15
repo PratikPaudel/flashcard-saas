@@ -7,7 +7,7 @@ import TabPanel from '@mui/joy/TabPanel';
 import Typography from '@mui/joy/Typography';
 import { Box } from '@mui/material';
 
-export default function TabsPricingExample() {
+export default function PricingTabs() {
     return (
         <Box
             sx={{
