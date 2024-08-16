@@ -26,7 +26,7 @@ Return in the following JSON format:
 `;
 
 export async function POST(req) {
-    const client = new Groq(process.env.Groq_API_KEY);
+    const client = new Groq(process.env.GROQ_API_KEY);
 
     // Extract content from the request body
     let content;
