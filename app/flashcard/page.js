@@ -53,7 +53,7 @@ export default function Flashcard() {
                     <Grid item xs={12} sm={6} md={4} key={index}>
                         <Card>
                             <CardActionArea onClick={() => handleCardClick(index)}>
-                                <CardContent>
+                                <CardContent sx={{backgroundColor: "#fff740"}}>
                                     <Box
                                         sx={{
                                             perspective: "1000px",
@@ -87,12 +87,12 @@ export default function Flashcard() {
                                     >
                                         <div>
                                             <div>
-                                                <Typography variant="h5" component="div">
+                                                <Typography variant="h5" component="div" sx={{ fontFamily: 'Kalam, cursive', fontSize: "1.0rem" }}>
                                                     {flashcard.front}
                                                 </Typography>
                                             </div>
                                             <div>
-                                                <Typography variant="h5" component="div">
+                                                <Typography variant="h5" component="div" sx={{ fontFamily: 'Kalam, cursive', fontSize: "1.0rem" }}>
                                                     {flashcard.back}
                                                 </Typography>
                                             </div>

@@ -155,7 +155,7 @@ export default function Generate() {
                             <Grid item xs={12} sm={6} md={4} key={index}>
                                 <Card>
                                     <CardActionArea onClick={() => handleCardClick(index)}>
-                                        <CardContent>
+                                        <CardContent sx={{margin:0, padding:0}}>
                                             <Box
                                                 sx={{
                                                     perspective: "1000px",
@@ -165,6 +165,7 @@ export default function Generate() {
                                                         position: "relative",
                                                         width: "100%",
                                                         height: "200px",
+                                                        background: "linear-gradient(#F9EFAF, #F7E98D)",
                                                         transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
                                                     },
                                                     "& > div > div": {
@@ -187,14 +188,14 @@ export default function Generate() {
                                                     },
                                                 }}
                                             >
-                                                <div>
+                                                <div>   
                                                     <div>
-                                                        <Typography variant="h5" component="div">
+                                                        <Typography variant="h5" component="div" sx={{ fontFamily: 'Gloria Hallelujah, cursive', fontSize: "1.3rem", padding: "10px" }}>
                                                             {flashcard.front}
                                                         </Typography>
                                                     </div>
                                                     <div>
-                                                        <Typography variant="h5" component="div">
+                                                        <Typography variant="h5" component="div" sx={{ fontFamily: 'Gloria Hallelujah, cursive', fontSize: "1.0rem" }}>
                                                             {flashcard.back}
                                                         </Typography>
                                                     </div>

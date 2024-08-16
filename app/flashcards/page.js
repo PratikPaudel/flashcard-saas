@@ -95,7 +95,7 @@ export default function Flashcards() {
                             <Grid item xs={12} sm={6} md={4} key={index}>
                                 <Card>
                                     <CardActionArea onClick={() => handleCardClick(index)}>
-                                        <CardContent>
+                                        <CardContent sx={{background: "linear-gradient(#F9EFAF, #F7E98D)",}}>
                                             <Box
                                                 sx={{
                                                     perspective: "1000px",
@@ -129,12 +129,12 @@ export default function Flashcards() {
                                             >
                                                 <div>
                                                     <div>
-                                                        <Typography variant="h5" component="div">
+                                                        <Typography variant="h5" component="div" sx={{ fontFamily: 'Gloria Hallelujah, cursive', fontSize: "1.0rem", background: "linear-gradient(#F9EFAF, #F7E98D)" }}>
                                                             {flashcard.front}
                                                         </Typography>
                                                     </div>
                                                     <div>
-                                                        <Typography variant="h5" component="div">
+                                                        <Typography variant="h5" component="div" sx={{ fontFamily: 'Gloria Hallelujah, cursive', fontSize: "1.0rem",  background: "linear-gradient(#F9EFAF, #F7E98D)"  }}>
                                                             {flashcard.back}
                                                         </Typography>
                                                     </div>
