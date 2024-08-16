@@ -35,17 +35,33 @@ export default function Generate() {
     const router = useRouter();
 
     const handleSubmit = async () => {
-        fetch("api/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ content: text }),
-        })
-            .then((res) => res.json())
-            .then((data) => setFlashcards(data))
-            .catch((error) => console.error("Error:", error));
+        try {
+            const response = await fetch("api/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content: text }),
+            });
+
+            if (!response.ok) {
+                // Log response details for debugging
+                console.error("Response error:", {
+                    status: response.status,
+                    statusText: response.statusText,
+                    body: await response.text() // Read the response body for more details
+                });
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setFlashcards(data);
+        } catch (error) {
+            console.error("Error:", error);
+            // You might want to show user-friendly error messages in your UI as well
+        }
     };
+
 
     const handleCardClick = (id) => {
         setFlipped((prev) => ({
