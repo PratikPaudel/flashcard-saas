@@ -66,6 +66,7 @@ export async function POST(req) {
             stop: null
         });
         console.log("Completion response:", completion);
+        console.log("Completion response 2:", completion.choices[0].message.content);
     } catch (error) {
         console.error("Error with Groq SDK request:", error);
         return NextResponse.json({ error: "Failed to get completion from Groq SDK" }, { status: 500 });
