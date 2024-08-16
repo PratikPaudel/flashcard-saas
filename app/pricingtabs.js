@@ -5,8 +5,8 @@ import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
 import Typography from '@mui/joy/Typography';
-import { Box } from '@mui/material';
-
+import {Box, Button} from '@mui/material';
+import { handleSubmit } from './page.js';
 export default function PricingTabs() {
     return (
         <Box
@@ -78,6 +78,9 @@ export default function PricingTabs() {
                             / user / month
                         </Typography>
                     </Typography>
+                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                        Subscribe
+                    </Button>
                 </TabPanel>
                 <TabPanel value={2}>
                     <Typography level="inherit">
@@ -103,6 +106,9 @@ export default function PricingTabs() {
                             / user / month
                         </Typography>
                     </Typography>
+                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                        Subscribe
+                    </Button>
                 </TabPanel>
             </Tabs>
         </Box>
