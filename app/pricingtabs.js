@@ -78,7 +78,7 @@ export default function PricingTabs() {
                             / user / month
                         </Typography>
                     </Typography>
-                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={() => handleSubmit('basic')}>
                         Subscribe
                     </Button>
                 </TabPanel>
@@ -106,7 +106,7 @@ export default function PricingTabs() {
                             / user / month
                         </Typography>
                     </Typography>
-                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                    <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={() => handleSubmit('pro')}>
                         Subscribe
                     </Button>
                 </TabPanel>
