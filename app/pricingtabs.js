@@ -15,6 +15,7 @@ export default function PricingTabs() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 textAlign: 'center',
+                paddingBottom: 5,
             }}
         >
             <Tabs
@@ -26,7 +27,7 @@ export default function PricingTabs() {
                     borderRadius: 'lg',
                     boxShadow: 'sm',
                     overflow: 'auto',
-                    height: 500,
+                    height: 200,
                 }}
             >
                 <TabList

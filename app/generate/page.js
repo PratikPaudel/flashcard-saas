@@ -19,11 +19,11 @@ import {
     DialogActions,
 } from "@mui/material";
 
-import { collection, doc, getDoc, writeBatch } from "firebase/firestore";
-import { useRouter } from "next/navigation";
-
-import { useState } from "react";
 import { db } from "@/firebase";
+import { collection, doc, getDoc, writeBatch, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import CustomAppBar from "@/app/appbar";
 
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -94,6 +94,7 @@ export default function Generate() {
     };
 
     return (
+        <> <CustomAppBar />
         <Container maxWidth="md">
             <Box
                 sx={{
@@ -219,5 +220,6 @@ export default function Generate() {
                 </DialogActions>
             </Dialog>
         </Container>
+        </>
     );
 }
