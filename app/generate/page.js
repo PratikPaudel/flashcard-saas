@@ -148,9 +148,7 @@ export default function Generate() {
                                                         position: "relative",
                                                         width: "100%",
                                                         height: "200px",
-                                                        transform: flipped[index]
-                                                            ? "rotateY(180deg)"
-                                                            : "rotateY(0deg)",
+                                                        transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
                                                     },
                                                     "& > div > div": {
                                                         position: "absolute",
@@ -163,8 +161,12 @@ export default function Generate() {
                                                         padding: 2,
                                                         boxSizing: "border-box",
                                                     },
+                                                    "& > div > div:nth-of-type(1)": {
+                                                        visibility: flipped[index] ? "hidden" : "visible",
+                                                    },
                                                     "& > div > div:nth-of-type(2)": {
                                                         transform: "rotateY(180deg)",
+                                                        visibility: flipped[index] ? "visible" : "hidden",
                                                     },
                                                 }}
                                             >
