@@ -79,9 +79,17 @@ Return in the following JSON format:
 
 export async function POST(req) {
     const client = new Groq(process.env.Groq_API_KEY);
-    const data = await req.json(); // Correct method to parse request body
 
-    console.log("Request data:", data);
+    // Extract content from the request body
+    const { content } = await req.json();
+
+    // Check if content is a string
+    console.log("Request content:", content);
+    console.log("Content type:", typeof content);  // This should log 'string'
+
+    if (typeof content !== 'string') {
+        return NextResponse.json({ error: "Content must be a string" }, { status: 400 });
+    }
 
     const completion = await client.chat.completions.create({
         model: "llama3-8b-8192",
@@ -92,7 +100,7 @@ export async function POST(req) {
             },
             {
                 role: "user",
-                content: data
+                content: `Create flashcards for the topic: ${content}`
             }
         ],
         temperature: 1,
@@ -102,14 +110,19 @@ export async function POST(req) {
         stop: null
     });
 
-    console.log("Completion response:", completion);
+    console.log("Completion response:", completion.choices[0].message.content);
 
     let flashcards;
     try {
-        flashcards = JSON.parse(completion.choices[0].message.content);
+        // Extract the JSON part from the response using a regular expression
+        const jsonResponse = completion.choices[0].message.content.match(/\{[^]*\}/)[0];
+
+        // Parse the extracted JSON
+        flashcards = JSON.parse(jsonResponse);
     } catch (error) {
         console.error("JSON parsing error:", error);
         return NextResponse.json({ error: "Invalid JSON response from Groq" }, { status: 500 });
     }
+
     return NextResponse.json(flashcards.flashcards);
 }
