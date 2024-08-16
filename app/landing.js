@@ -3,6 +3,7 @@
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AppBar, Toolbar, Typography, Button, Box, Grid, Card, CardContent, CardMedia, Tab, Tabs } from "@mui/material";
 import { useState } from 'react';
+import CustomAppBar from './appbar';
 
 function CustomTabPanel({ value, index, children }) {
     return value === index && (
@@ -22,20 +23,7 @@ export default function Landing() {
     return (
         <main>
             <div>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6" style={{ flexGrow: 1 }}>
-                            Flashcard Creator
-                        </Typography>
-                        <SignedOut>
-                            <Button color="inherit" href="/sign-in">Login</Button>
-                            <Button color="inherit" href="/sign-up">Sign Up</Button>
-                        </SignedOut>
-                        <SignedIn>
-                            <UserButton />
-                        </SignedIn>
-                    </Toolbar>
-                </AppBar>
+                <CustomAppBar />
                 {/* hero section */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh', textAlign: 'center', my: 4 }}>
                     <Box>
