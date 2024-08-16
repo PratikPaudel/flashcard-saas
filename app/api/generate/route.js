@@ -33,8 +33,6 @@ export async function POST(req) {
     try {
         const body = await req.json();
         content = body.content;
-        console.log("Request content:", content);
-        console.log("Content type:", typeof content);  // Should log 'string'
 
         if (typeof content !== 'string') {
             return NextResponse.json({ error: "Content must be a string" }, { status: 400 });
@@ -65,8 +63,6 @@ export async function POST(req) {
             stream: false,
             stop: null
         });
-        console.log("Completion response:", completion);
-        console.log("Completion response 2:", completion.choices[0].message.content);
     } catch (error) {
         console.error("Error with Groq SDK request:", error);
         return NextResponse.json({ error: "Failed to get completion from Groq SDK" }, { status: 500 });
@@ -81,7 +77,6 @@ export async function POST(req) {
             throw new Error("No message content found in the response.");
         }
 
-        console.log("Completion response content:", responseContent);
 
         // Extract the JSON part from the response using a regular expression
         const jsonResponse = responseContent.match(/\{[\s\S]*\}/);
