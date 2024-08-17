@@ -2,25 +2,14 @@
 import { Container, Box, Typography, AppBar, Toolbar, Button } from '@mui/material'
 import { SignUp } from '@clerk/nextjs'
 import Link from 'next/link'
+import CustomAppBar from "@/app/appbar";
 
 export default function SignUpPage() {
 // The page uses Material-UI’s `Container` and `Box` components to create a centered, responsive layout. The `maxWidth=”sm”` prop on the Container ensures the content doesn’t stretch too wide on larger screens.
     return(
         <main>
             <div>
-                <AppBar position="static" sx={{backgroundColor: '#3f51b5'}}>
-                    <Toolbar>
-                        <Typography variant="h6" sx={{flexGrow: 1}}>
-                            Flashcard SaaS
-                        </Typography>
-                        <Button color="inherit">
-                            <Link href="../../sign-up" passHref> 
-                                Login
-                            </Link>
-                        </Button>
-                        <Link href="../../sign-up">Sign Up</Link>
-                    </Toolbar>
-                </AppBar>
+                <CustomAppBar />
                 <Box
                     display="flex"
                     flexDirection="column"
