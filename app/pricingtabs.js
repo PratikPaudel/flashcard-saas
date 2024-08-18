@@ -13,21 +13,30 @@ export default function PricingTabs() {
             sx={{
                 display: 'flex',
                 justifyContent: 'center',
+                flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
                 paddingBottom: 5,
             }}
         >
+            <Typography variant="h4" component="h2" gutterBottom sx={{ marginBottom: 6, fontSize: '2rem'}}>Pricing</Typography>
             <Tabs
                 variant="outlined"
                 aria-label="Pricing plan"
                 defaultValue={0}
                 sx={{
-                    width: 750,
+                    width: {
+                        xs: 300, // mobile
+                        sm: 500, // tablet
+                        md: 750, // larger screens
+                    },
                     borderRadius: 'lg',
                     boxShadow: 'sm',
                     overflow: 'auto',
-                    height: 200,
+                    height: {
+                        xs: 250, // mobile
+                        md: 220, // larger screens
+                    },
                 }}
             >
                 <TabList
