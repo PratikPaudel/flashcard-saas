@@ -1,18 +1,17 @@
 ﻿'use client';
-
+import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
 import { collection, doc, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
-import { Container, Grid, Box, Typography, Card, CardActionArea, CardContent } from '@mui/material';
+import {Container, Grid, Box, Typography, Card, CardActionArea, CardContent, Button} from '@mui/material';
 import { useSearchParams } from 'next/navigation';
-import CustomAppBar from "@/app/appbar";
 
 export default function Flashcard() {
     const { isLoaded, isSignedIn, user } = useUser();
     const [flashcards, setFlashcards] = useState([]);
     const [flipped, setFlipped] = useState({});
-
+    const router = useRouter(); // Initialize router
     const searchParams = useSearchParams();
     const search = searchParams.get('id');
 
@@ -29,6 +28,7 @@ export default function Flashcard() {
                 flashcards.push({ id: doc.id, ...doc.data() });
             });
             setFlashcards(flashcards);
+            localStorage.setItem('flashcards', JSON.stringify(flashcards));
         }
         getFlashcard();
     }, [user, search]);
@@ -46,7 +46,14 @@ export default function Flashcard() {
 
     return (
         <>
-            <CustomAppBar />
+            <Button
+                variant="contained"
+                color="primary"
+                sx={{ fontFamily: 'Kalam, cursive', mt: 4, mb: 2 }}
+                onClick={() => router.push('/practice')}
+            >
+                Practice Flashcards
+            </Button>
         <Container maxWidth="100vw">
             <Grid container spacing={3} sx={{ mt: 4 }}>
                 {flashcards.map((flashcard, index) => (
