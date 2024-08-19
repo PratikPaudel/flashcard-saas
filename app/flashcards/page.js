@@ -8,7 +8,6 @@ import {Container, Grid, Box, Typography, Card, CardActionArea, CardContent, But
 import { useSearchParams, useRouter } from 'next/navigation';
 import CustomAppBar from "@/app/appbar";
 import Flashcard from "@/app/flashcard/page.js";
-import styles from './CardStyles.module.css';
 import ArrowBack from "@mui/icons-material/ArrowBack";
 export default function Flashcards() {
     const { isLoaded, isSignedIn, user } = useUser();
