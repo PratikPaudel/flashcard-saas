@@ -207,9 +207,6 @@ export default function Generate() {
                 ) : (
                     flashcards.length > 0 && (
                         <Box sx={{ mt: 4, mb: 4 }}>
-                            <Typography variant="h5" gutterBottom align="center">
-                                Flashcards Preview
-                            </Typography>
                             <Grid container spacing={3}>
                                 {flashcards.map((flashcard, index) => (
                                     <Grid item xs={12} sm={6} md={4} key={index}>
