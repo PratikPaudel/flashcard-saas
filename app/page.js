@@ -2,6 +2,7 @@ import PricingTabs from './pricingtabs';
 import Landing from './landing';
 import Features from "./features";
 import getStripe from "@/utils/get-stripe";
+import TextExtractor from "@/app/components/TextExtractor/TextExtractor";
 
 export const handleSubmit = async (subscriptionType) => {
     const checkoutSession = await fetch('/api/checkout_session', {
@@ -31,6 +32,7 @@ export default function Home() {
                 <Landing />
                 <Features />
                 <PricingTabs />
+                <TextExtractor />
             </div>
         </main>
     );
