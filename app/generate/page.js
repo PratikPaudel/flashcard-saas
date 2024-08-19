@@ -121,25 +121,9 @@ export default function Generate() {
 
     if (!isAuthenticated) {
         return (
-            <Container maxWidth="md">
-                <Box
-                    sx={{
-                        mt: 4,
-                        mb: 6,
-                        p: 4,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        backgroundColor: "#f9f9f9",
-                        borderRadius: 2,
-                        boxShadow: 3,
-                    }}
-                >
-                    <Typography variant="h5" color="error" align="center" sx={{ mb: 2 }}>
-                        Please log in to generate flashcards.
-                    </Typography>
-                </Box>
-            </Container>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </Box>            
         );
     }
 
