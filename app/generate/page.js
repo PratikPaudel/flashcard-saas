@@ -24,6 +24,8 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import CustomAppBar from "@/app/appbar";
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import TextExtractor from "@/app/components/TextExtractor/TextExtractor";
+import {Divider} from "@mui/joy";
 
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -44,7 +46,7 @@ export default function Generate() {
         }
     }, [isLoaded, isSignedIn, router]);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (content, contentType) => {
         setLoading(true);
         try {
             const response = await fetch("api/generate", {
@@ -52,7 +54,7 @@ export default function Generate() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ content: text }),
+                body: JSON.stringify({ content, contentType }),
             });
 
             if (!response.ok) {
@@ -123,7 +125,7 @@ export default function Generate() {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <CircularProgress />
-            </Box>            
+            </Box>
         );
     }
 
@@ -132,36 +134,71 @@ export default function Generate() {
             <Container maxWidth="md">
                 <Box
                     sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        mt: 5,
+                    }}
+                >
+                    <Typography variant="h4">Generate FlashCards</Typography>
+                </Box>
+                <Box
+                    sx={{
                         mt: 4,
                         mb: 6,
                         display: "flex",
-                        flexDirection: "column",
+                        flexDirection: "row",
                         alignItems: "center",
+                        justifyContent: "center",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 4 }}>Generate FlashCards</Typography>
-                    <TextField
-                        id="input-with-icon-textfield"
-                        label="Type in to generate Flashcards"
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AccountCircle />
-                                </InputAdornment>
-                            ),
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "50%", // Adjust width if needed
                         }}
-                        variant="standard"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ mt: 3 }}
-                        onClick={handleSubmit}
                     >
-                        Submit
-                    </Button>
+                        <Typography variant="h5" sx={{ mb: 4 }}> PDF / Image </Typography>
+                        <TextExtractor onExtract={(extractedText, contentType) => {
+                            handleSubmit(extractedText, contentType);
+                        }} />
+                    </Box>
+
+                    <Divider orientation="vertical" sx={{ height: 'auto', mx: 4 }} />
+
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "50%", // Adjust width if needed
+                        }}
+                    >
+                        <TextField
+                            id="input-with-icon-textfield"
+                            label="Type in to generate Flashcards"
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <AccountCircle />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            variant="standard"
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ mt: 3 }}
+                            onClick={() => handleSubmit(text, "text")}
+                        >
+                            Submit
+                        </Button>
+                    </Box>
                 </Box>
                 {loading ? (
                     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
