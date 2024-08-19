@@ -32,7 +32,6 @@ export default function Home() {
                 <Landing />
                 <Features />
                 <PricingTabs />
-                <TextExtractor />
             </div>
         </main>
     );
