@@ -5,8 +5,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import PDFParserService from './PDFParser'; // Make sure this points to the client-side version
 import ImageParserService from './ImageParser';
 
-const TextExtractor = () => {
-    const [text, setText] = useState('');
+const TextExtractor = ({ onExtract }) => {
     const [loading, setLoading] = useState(false);
 
     const handleFileChange = async (event) => {
@@ -14,15 +13,18 @@ const TextExtractor = () => {
         if (file) {
             setLoading(true);
             try {
+                let extractedText = '';
+                let contentType = '';
                 if (file.type === 'application/pdf') {
-                    const extractedText = await PDFParserService.getTextFromPDF(file);
-                    setText(extractedText);
+                    extractedText = await PDFParserService.getTextFromPDF(file);
+                    contentType = 'pdf';
                 } else if (file.type.startsWith('image/')) {
-                    const extractedText = await ImageParserService.getTextFromImage(file);
-                    setText(extractedText);
+                    extractedText = await ImageParserService.getTextFromImage(file);
+                    contentType = 'image';
                 } else {
                     console.error('Unsupported file type');
                 }
+                onExtract(extractedText, contentType);
             } catch (error) {
                 console.error('Error extracting text:', error);
             }
@@ -36,7 +38,6 @@ const TextExtractor = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            minHeight="100vh"
             textAlign="center"
         >
             <input
@@ -60,7 +61,6 @@ const TextExtractor = () => {
             </Box>
 
             {loading && <CircularProgress />}
-            {text && <Typography variant="body1" component="pre">{text}</Typography>}
         </Box>
     );
 };
