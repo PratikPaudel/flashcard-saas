@@ -1,6 +1,5 @@
 ﻿import * as pdfjsLib from 'pdfjs-dist';
 
-// Set the path to the local PDF.js worker script
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
 class PDFParser {
