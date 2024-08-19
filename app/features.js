@@ -1,7 +1,6 @@
 ﻿// Code for the Features section of the landing page
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import {Divider} from "@mui/joy";
-
 export default function Features() {
     return (
         <Box sx={{ padding: 3, textAlign: 'center' }}>
@@ -11,7 +10,7 @@ export default function Features() {
                     <Card sx={{ maxWidth: '100%' }}>
                         <CardMedia
                             sx={{ height: 140 }}
-                            image="https://img.freepik.com/free-vector/realistic-ui-ux-background_52683-69487.jpg?size=626&ext=jpg"
+                            image="https://i.ibb.co/rQKqCSw/image.png"
                             title="Easy to Use"
                         />
                         <CardContent sx={{ textAlign: 'left' }}>
@@ -27,11 +26,11 @@ export default function Features() {
                 <Grid item xs={12} sm={4} md={3}>
                     <Card sx={{ maxWidth: '100%' }}>
                         <CardMedia
-                            sx={{ height: 140 }}
-                            image="https://img.freepik.com/free-vector/realistic-ui-ux-background_52683-69487.jpg?size=626&ext=jpg"
+                            sx={{height: 140}}
+                            image="https://i.ibb.co/7vNtJP5/image.png"
                             title="Customizable"
-                        />
-                        <CardContent sx={{ textAlign: 'left' }}>
+                            />
+                        <CardContent sx={{textAlign: 'left'}}>
                             <Typography gutterBottom variant="h5" component="div">
                                 Customizable
                             </Typography>
@@ -40,15 +39,15 @@ export default function Features() {
                             </Typography>
                         </CardContent>
                     </Card>
-            </Grid>
-            <Grid item xs={12} sm={4} md={3}>
+                </Grid>
+                <Grid item xs={12} sm={4} md={3}>
                 <Card sx={{ maxWidth: '100%' }}>
                     <CardMedia
-                        sx={{ height: 140 }}
-                        image="https://img.freepik.com/free-vector/realistic-ui-ux-background_52683-69487.jpg?size=626&ext=jpg"
+                        sx={{height: 140}}
+                        image="https://i.ibb.co/NWdqK7g/image.png"
                         title="Share and Collaborate"
-                    />
-                    <CardContent sx={{ textAlign: 'left' }}>
+                        />
+                    <CardContent sx={{textAlign: 'left'}}>
                         <Typography gutterBottom variant="h5" component="div">
                             Share and Collaborate
                         </Typography>
@@ -57,9 +56,9 @@ export default function Features() {
                         </Typography>
                     </CardContent>
                 </Card>
+                </Grid>
             </Grid>
-            </Grid>
-            <Divider sx={{ width: '50%', margin: '4rem auto 0' }} />
+            <Divider sx={{width: '50%', margin: '4rem auto 0' }} />
         </Box>
         
     );
