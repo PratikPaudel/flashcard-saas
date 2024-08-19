@@ -6,6 +6,7 @@ import { collection, doc, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
 import {Container, Grid, Box, Typography, Card, CardActionArea, CardContent, Button} from '@mui/material';
 import { useSearchParams } from 'next/navigation';
+import ArrowBack from '@mui/icons-material/ArrowBack';
 
 export default function Flashcard() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -46,14 +47,24 @@ export default function Flashcard() {
 
     return (
         <>
-            <Button
-                variant="contained"
-                color="primary"
-                sx={{ fontFamily: 'Kalam, cursive', mt: 4, mb: 2 }}
-                onClick={() => router.push('/practice')}
-            >
-                Practice Flashcards
-            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+                <Button
+                    variant="contained"
+                    sx={{ fontFamily: 'Kalam, cursive', mt: 5, mb: 2, color: 'primary'}}
+                    onClick={() => router.back()}
+                >
+                    <ArrowBack />
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ fontFamily: 'Kalam, cursive', mt: 5, mb: 2 }}
+                    onClick={() => router.push('/practice')}
+                >
+                    Practice Flashcards
+                </Button>
+                
+            </Box>
         <Container maxWidth="100vw">
             <Grid container spacing={3} sx={{ mt: 4 }}>
                 {flashcards.map((flashcard, index) => (
