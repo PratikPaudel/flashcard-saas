@@ -55,34 +55,34 @@ export default function Generate() {
     }, [isLoaded, isSignedIn, router]);
 
     const handleSubmit = async (content, contentType) => {
-        setLoading(true);
-        try {
-            const response = await fetch("api/generate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Cache-Control": "no-cache" // Ensure no caching
-                },
-                body: JSON.stringify({ content, contentType }),
-            });
-
-            if (!response.ok) {
-                console.error("Response error:", {
-                    status: response.status,
-                    statusText: response.statusText,
-                    body: await response.text()
-                });
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            console.log("Flashcards data:", data); // Log the data for debugging
-            setFlashcards(data);
-        } catch (error) {
-            console.error("Error:", error instanceof Error ? error.message : error);
-        } finally {
-            setLoading(false);
-        }
+        // setLoading(true);
+        // try {
+        //     const response = await fetch("api/generate", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Cache-Control": "no-cache" // Ensure no caching
+        //         },
+        //         body: JSON.stringify({ content, contentType }),
+        //     });
+        //
+        //     if (!response.ok) {
+        //         console.error("Response error:", {
+        //             status: response.status,
+        //             statusText: response.statusText,
+        //             body: await response.text()
+        //         });
+        //         throw new Error(`HTTP error! Status: ${response.status}`);
+        //     }
+        //
+        //     const data = await response.json();
+        //     console.log("Flashcards data:", data); // Log the data for debugging
+        //     setFlashcards(data);
+        // } catch (error) {
+        //     console.error("Error:", error instanceof Error ? error.message : error);
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
     const handleCardClick = (id) => {
