@@ -15,7 +15,9 @@ import {
     DialogTitle,
     DialogContent,
     DialogContentText,
-    DialogActions, InputAdornment, CircularProgress,
+    DialogActions,
+    InputAdornment,
+    CircularProgress,
 } from "@mui/material";
 
 import { db } from "@/firebase";
@@ -25,7 +27,13 @@ import React, { useState, useEffect } from "react";
 import CustomAppBar from "@/app/appbar";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextExtractor from "@/app/components/TextExtractor/TextExtractor";
-import {Divider} from "@mui/joy";
+import { Divider } from "@mui/joy";
+
+// Define flashcard structure
+const defaultFlashcard = {
+    front: "",
+    back: "",
+};
 
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -71,14 +79,14 @@ export default function Generate() {
             console.log("Flashcards data:", data); // Log the data for debugging
             setFlashcards(data);
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Error:", error instanceof Error ? error.message : error);
         } finally {
             setLoading(false);
         }
     };
 
     const handleCardClick = (id) => {
-        setFlipped((prev) => ({
+        setFlipped(prev => ({
             ...prev,
             [id]: !prev[id],
         }));
@@ -87,6 +95,7 @@ export default function Generate() {
     const handleOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -96,31 +105,41 @@ export default function Generate() {
             alert("Please enter a name");
             return;
         }
-        const batch = writeBatch(db);
-        const userDocRef = doc(collection(db, "users"), user.id);
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists()) {
-            const collections = docSnap.data().flashcards || [];
-            if (collections.find((f) => f.name === name)) {
-                alert("Flashcard collection with the same name already exists.");
-                return;
-            } else {
-                collections.push({ name });
-                batch.set(userDocRef, { flashcards: collections }, { merge: true });
-            }
-        } else {
-            batch.set(userDocRef, { flashcards: [{ name }] });
+        if (!user?.id) {
+            console.error("User ID is not available");
+            return;
         }
 
-        const colRef = collection(userDocRef, name);
-        flashcards.forEach((flashcard) => {
-            const cardDocRef = doc(colRef);
-            batch.set(cardDocRef, flashcard);
-        });
+        const batch = writeBatch(db);
+        const userDocRef = doc(db, "users", user.id);
 
-        await batch.commit();
-        handleClose();
-        router.push("/flashcards");
+        try {
+            const docSnap = await getDoc(userDocRef);
+            if (docSnap.exists()) {
+                const collections = docSnap.data().flashcards || [];
+                if (collections.find(f => f.name === name)) {
+                    alert("Flashcard collection with the same name already exists.");
+                    return;
+                } else {
+                    collections.push({ name });
+                    batch.set(userDocRef, { flashcards: collections }, { merge: true });
+                }
+            } else {
+                batch.set(userDocRef, { flashcards: [{ name }] });
+            }
+
+            const colRef = collection(userDocRef, name);
+            flashcards.forEach((flashcard, index) => {
+                const cardDocRef = doc(colRef, index.toString());
+                batch.set(cardDocRef, flashcard);
+            });
+
+            await batch.commit();
+            handleClose();
+            router.push("/flashcards");
+        } catch (error) {
+            console.error("Error saving flashcards:", error);
+        }
     };
 
     if (!isAuthenticated) {
@@ -132,7 +151,8 @@ export default function Generate() {
     }
 
     return (
-        <> <CustomAppBar />
+        <>
+            <CustomAppBar />
             <Container maxWidth="md">
                 <Box
                     sx={{
@@ -142,7 +162,7 @@ export default function Generate() {
                         mt: 5,
                     }}
                 >
-                    <Typography variant="h4">Generate FlashCards</Typography>
+                    <Typography variant="h4">Generate Flashcards</Typography>
                 </Box>
                 <Box
                     sx={{
@@ -214,7 +234,7 @@ export default function Generate() {
                                     <Grid item xs={12} sm={6} md={4} key={index}>
                                         <Card>
                                             <CardActionArea onClick={() => handleCardClick(index)}>
-                                                <CardContent sx={{margin:0, padding:0}}>
+                                                <CardContent sx={{ margin: 0, padding: 0 }}>
                                                     <Box
                                                         sx={{
                                                             perspective: "1000px",
@@ -266,37 +286,39 @@ export default function Generate() {
                                     </Grid>
                                 ))}
                             </Grid>
-                            <Box sx={{ mt: 4, mb:4, display: "flex", justifyContent: "center" }}>
-                                <Button variant="contained" sx={{ backgroundColor: '#1565c0' }} onClick={handleOpen}>
+                            <Box sx={{ mt: 4, mb: 4, display: "flex", justifyContent: "center" }}>
+                                <Button variant="contained" color="primary" onClick={handleOpen}>
                                     Save
                                 </Button>
                             </Box>
                         </Box>
                     )
                 )}
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Save Flashcards</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Please enter a name for your flashcards collection
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            label="Collection Name"
-                            type="text"
-                            fullWidth
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            variant="outlined"
-                        ></TextField>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={saveFlashcards}>Save</Button>
-                    </DialogActions>
-                </Dialog>
             </Container>
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Save Flashcards</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Please enter a name for your flashcard collection.
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Collection Name"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={saveFlashcards}>Save</Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }
