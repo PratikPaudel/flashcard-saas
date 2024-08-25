@@ -71,7 +71,7 @@ export default function Flashcard() {
                     <Grid item xs={12} sm={6} md={4} key={index}>
                         <Card>
                             <CardActionArea onClick={() => handleCardClick(index)}>
-                                <CardContent sx={{backgroundColor: "#fff740"}}>
+                                <CardContent sx={{backgroundColor: "#E2DFD2"}}>
                                     <Box
                                         sx={{
                                             perspective: "1000px",

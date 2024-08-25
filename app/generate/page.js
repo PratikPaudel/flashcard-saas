@@ -52,7 +52,8 @@ export default function Generate() {
             const response = await fetch("api/generate", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache" // Ensure no caching
                 },
                 body: JSON.stringify({ content, contentType }),
             });
@@ -67,6 +68,7 @@ export default function Generate() {
             }
 
             const data = await response.json();
+            console.log("Flashcards data:", data); // Log the data for debugging
             setFlashcards(data);
         } catch (error) {
             console.error("Error:", error);
